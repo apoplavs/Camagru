@@ -2,31 +2,73 @@
 
 class Router
 {
-	private $route;
+	private $controller;
+	private $method;
 	private $request_status = false;
 
-	public function __construct()
-	{
-		$routPath = $this->getRoutePath();
-		$this->route = include($routPath);
+	public function __construct() {
+		$route_path = $this->getRoutePath();
+		$this->controller = $this->getControllerName($route_path);
+		$this->method = $this->getMethodName();
 	}
 
 
+	public function  err404() {
+		include(ROOT . '/views/errors/404.php');
+		exit;
+	}
+
+	public function getResponse() {
+
+		if (file_exists($this->route)) {
+			require_once($this->route);
+
+		} else {
+			$this->err404();
+		}
 
 
-
-
-
-
-
+	}
 
 
 
 	// PRIVATE METHODS
 
 	private function getRoutePath()	{
-		# code...
+		if (!empty($_SERVER['REQUEST_URI'])) {
+			return trim($_SERVER['REQUEST_URI'], ROOT_URI.'/');
+		}
 	}
+
+	private function getControllerName($route_path)	{
+		// ROOT.'/app/controllers/HomeController.php'
+		switch ($route_path) {
+			case 'home':
+				return 'HomeController.php';
+			case 'login':
+				return 'LoginController.php';
+			case 'logout':
+				return 'LogoutController.php';	
+			case 'register':
+				return 'RegisterController.php';
+			case 'gallery':
+				return 'GalleryController.php';
+						
+			// case (preg_match('/John.*/', $name) ? true : false) :
+   //      		// do stuff for people whose name is John, Johnny, ...
+   //      		break;	
+			
+			default:
+				$this->err404();
+		}
+	}
+
+	private function getMethodName() {
+		if (!empty($_SERVER['REQUEST_URI'])) {
+			return trim($_SERVER['REQUEST_URI'], ROOT_URI.'/');
+		}
+	}
+
 
 
 
@@ -41,11 +83,7 @@ class Router
 
 	// ELSE
 
-	public function  error404()
-	{
-		include(ROOT . '/views/error/404.php');
-		exit;
-	}
+	
 
 	private function getURI()
 	{
