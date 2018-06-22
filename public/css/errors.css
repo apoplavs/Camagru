@@ -1,0 +1,10 @@
+#error-image {
+    padding-top: 60px;
+    text-align: center;
+    width: 90%;
+    position: fixed;
+}
+#error-image>img {
+    width: 70%;
+    max-width: 800px;
+}

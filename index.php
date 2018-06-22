@@ -8,9 +8,9 @@ if (!isset($_SESSION)) {
 	error_reporting(E_ALL);
 }
 
-echo "<pre>";
-print_r($_SERVER);
-echo "</pre>";
+//echo "<pre>";
+//print_r($_SERVER);
+//echo "</pre>";
 
 
 
@@ -37,7 +37,5 @@ require_once (ROOT.'/app/Mail.php');
 
 //Call Router
 $router = new Router();
-// getting response page
-$response = $router->getResponse();
-// show_page
-echo $response;
+// getting and showing response page
+$router->showResponse();

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div id="error-image">
-		<img src="<?=ROOT_URI?>/public/img/404.jpg">
+		<img src="<?=ROOT_URI?>/public/img/400.jpg">
 	</div>
 	<script>
 		setTimeout(function() {

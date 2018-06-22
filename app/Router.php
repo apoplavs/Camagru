@@ -12,22 +12,54 @@ class Router
 		$this->method = $this->getMethodName();
 	}
 
+    public function  error(string $error_number = '400') {
+	    if (file_exists(ROOT . '/views/errors/'.$error_number.'.php')) {
+            include(ROOT . '/views/errors/'.$error_number.'.php');
+        } else {
+            include(ROOT . '/views/errors/404.php');
+        }
+        exit;
+    }
 
-	public function  err404() {
-		include(ROOT . '/views/errors/404.php');
-		exit;
-	}
+    /**
+     * include necessary file
+     * and call appropriate method
+     */
+    public function showResponse() {
 
-	public function getResponse() {
+		if (file_exists(ROOT.'/app/controllers/'.$this->controller.'.php')) {
+			require_once(ROOT.'/app/controllers/'.$this->controller.'.php');
 
-		if (file_exists($this->route)) {
-			require_once($this->route);
-
+			switch ($this->method) {
+                case 'GET' :
+                    $this->request_status = $this->controller::index();
+                    break ;
+                case 'POST' :
+                    $this->request_status = $this->controller::store($_POST);
+                    break ;
+                case 'PUT' :
+                    if (array_key_exists('object', $_POST)) {
+                        $this->request_status = $this->controller::edit($_POST['object'], $_POST);
+                    } else {
+                        $this->error('400');
+                    }
+                    break ;
+                case 'DELETE' :
+                    if (array_key_exists('object', $_POST)) {
+                        $this->request_status = $this->controller::delete($_POST['object']);
+                    } else {
+                        $this->error('400');
+                    }
+                    break ;
+                default :
+                    $this->error('400');
+            }
 		} else {
-			$this->err404();
+			$this->error('404');
 		}
-
-
+		if (!$this->request_status) {
+            $this->error('400');
+        }
 	}
 
 
@@ -37,37 +69,65 @@ class Router
 	private function getRoutePath()	{
 		if (!empty($_SERVER['REQUEST_URI'])) {
 			return trim($_SERVER['REQUEST_URI'], ROOT_URI.'/');
-		}
+		} else {
+            $this->error('404');
+        }
 	}
 
 	private function getControllerName($route_path)	{
 		// ROOT.'/app/controllers/HomeController.php'
 		switch ($route_path) {
 			case 'home':
-				return 'HomeController.php';
+				return 'HomeController';
 			case 'login':
-				return 'LoginController.php';
+				return 'LoginController';
 			case 'logout':
-				return 'LogoutController.php';	
+				return 'LogoutController';
 			case 'register':
-				return 'RegisterController.php';
+				return 'RegisterController';
 			case 'gallery':
-				return 'GalleryController.php';
+				return 'GalleryController';
 						
 			// case (preg_match('/John.*/', $name) ? true : false) :
    //      		// do stuff for people whose name is John, Johnny, ...
    //      		break;	
 			
 			default:
-				$this->err404();
+                echo "<pre>";
+print_r($route_path);
+echo "</pre>";
+				$this->error('404');
 		}
 	}
 
 	private function getMethodName() {
-		if (!empty($_SERVER['REQUEST_URI'])) {
-			return trim($_SERVER['REQUEST_URI'], ROOT_URI.'/');
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		    if (array_key_exists('_method', $_POST)) {
+                switch (strtoupper($_POST['_method'])) {
+                    case 'PUT' :
+                        return ('PUT');
+                    case 'DELETE' :
+                        return ('DELETE');
+                    default :
+                        $this->error('405');
+                }
+            } else {
+                return ('POST');
+            }
+
 		}
-	}
+        return ('GET');
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -82,16 +142,6 @@ class Router
 
 
 	// ELSE
-
-	
-
-	private function getURI()
-	{
-		if (!empty($_SERVER['REQUEST_URI'])) {
-			return trim($_SERVER['REQUEST_URI'], '/');
-		}
-		return null;
-	}
 
 	private function authRedirect($pattern)
 	{

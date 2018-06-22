@@ -14,7 +14,7 @@ class LoginController extends Controller
 
 	}
 
-	public static function edit($id) {
+	public static function edit($id, $request) {
 
 	}
 

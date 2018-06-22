@@ -3,24 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>Method Not Allowed</title>
+    <link href="<?=ROOT_URI?>/public/css/errors.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<style type="text/css">
-	#error-image {
-	padding-top: 60px;
-	text-align: center;
-	width: 90%;
-	position: fixed;
-	}
-	</style>
-
-<div id="error-image">
-	<img src="<?=ROOT.?>/public/img/405.jpg">
-</div>
-<script>
-	setTimeout(function() {
-		location.pathname = <?=ROOT_URI?> + '/home';
-	}, 8000);
-</script>
+	<div id="error-image">
+		<img src="<?=ROOT_URI?>/public/img/405.jpg">
+	</div>
+	<script>
+		setTimeout(function() {
+			window.location.replace('<?=ROOT_URI?>' + '/home');
+		}, 998000);
+	</script>
 </body>
 </html>
