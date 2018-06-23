@@ -7,13 +7,12 @@ if (!isset($_SESSION)) {
 	ini_set('display_errors', 1);
 	error_reporting(E_ALL);
 }
+define('DEBUG', true);
 
-//echo "<pre>";
-//print_r($_SERVER);
-//echo "</pre>";
-
-
-
+// if SESSION is Undefined then initialise
+if (!isset($_SESSION)) {
+    $_SESSION = null;
+}
 
 //Define root directory
 if (!defined('ROOT')) {
@@ -23,8 +22,10 @@ if (!defined('ROOT')) {
 //Define root URI
 if (!defined('ROOT_URI')) {
 	define('ROOT_URI', substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], '/index.php')));
-	// echo $_SERVER['REQUEST_URI'];
 }
+
+//including tools for debug
+require_once (ROOT.'/app/Debug.php');
 
 
 //including files
@@ -33,8 +34,8 @@ require_once (ROOT.'/app/Router.php');
 require_once (ROOT.'/app/models/DB.php');
 require_once (ROOT.'/app/controllers/Controller.php');
 require_once (ROOT.'/app/Mail.php');
-// include_once(ROOT.'/app/controllers/Sendmail.php');
-
+echo "<br><br><br>";
+Debug::dd($_SESSION);
 //Call Router
 $router = new Router();
 // getting and showing response page

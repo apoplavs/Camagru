@@ -3,72 +3,118 @@ html {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.25;
     color: #212529;
     text-align: left;
     background-color: #fff;
 }
+body {
+    margin-top: 70px;
+}
 
-.navbar {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: .5rem 1rem;
-    background-color: #f8f9fa;
+/*MAIN*/
+a {
+    color: #fbb900;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #444;
+}
+
+img {
+    width: 100%;
+}
+
+header {
+    background: #fff;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-bottom: 4px solid #fbb900;
+    z-index: 100;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
-
-.navbar-collapse {
-    -ms-flex-preferred-size: 100%;
-    flex-basis: 100%;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-
-    -webkit-box-pack: end!important;
-    -ms-flex-pack: end!important;
-    justify-content: flex-end!important;
+#logo{
+    margin: 10px 0 10px 10px;
+    float: left;
+    width: 200px;
+    height: 40px;
+    /*background: url(../img/logo.png) no-repeat center;*/
+    display: block;
 }
 
-.navbar-nav {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    padding-left: 0;
-    margin-bottom: 0;
+nav {
+    float: right;
+    padding: 10px 20px 10px 0;
+}
+
+#menu-icon {
+    display: hidden;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background: #fbb900 url(../img/menu-icon.png) center;
+}
+
+a:hover#menu-icon {
+    background-color: #444;
+    border-radius: 4px 4px 0 0;
+}
+
+ul {
     list-style: none;
 }
 
-ul.navbar-nav {
-    display: block;
-    list-style-type: disc;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 40px;
+li {
+    display: inline-block;
+    float: left;
+    padding: 5px 20px;
 }
 
-ul.navbar-nav li {
-    display: list-item;
-    text-align: -webkit-match-parent;
+.current {
+    color: #2262AD;
+}
+
+/*section {*/
+    /*margin: 80px auto 40px;*/
+    /*max-width: 980px;*/
+    /*position: relative;*/
+    /*padding: 20px*/
+/*}*/
+
+h1 {
+    font-size: 2em;
+    color: #2262AD;
+    line-height: 1.15em;
+    margin: 20px 0 ;
+}
+
+p {
+    line-height: 1.45em;
+    margin-bottom: 20px;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    opacity: 0.8;
+}
+
+div.footer-text {
+    padding: 10px 3%;
+}
+
+div.footer-text>span:nth-child(2) {
+    float: right;
 }
 
 
@@ -80,30 +126,46 @@ ul.navbar-nav li {
 
 
 
-@media (min-width: 992px) {
-	.navbar-expand-lg {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-}
 
-.navbar-expand-lg .navbar-collapse {
-    display: -webkit-box!important;
-    display: -ms-flexbox!important;
-    display: flex!important;
-    -ms-flex-preferred-size: auto;
-    flex-basis: auto;
-}
 
-.navbar-nav {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-}
 
+/*MEDIA QUERY*/
+@media only screen and (max-width : 720px) {
+
+    header {
+        position: absolute;
+    }
+
+    #menu-icon {
+        display: inline-block;
+    }
+
+    nav {
+        padding: 3px;
+        margin: 10px 17px 10px 10px;
+    }
+
+    nav ul, nav:active ul {
+        display: none;
+        position: absolute;
+        padding: 10px;
+        background: #fff;
+        /*border: 5px solid #444;*/
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+        right: 20px;
+        top: 37px;
+        width: 40%;
+        border-radius: 4px 0 4px 4px;
+    }
+
+    nav li {
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        margin: 0;
+    }
+
+    nav:hover ul {
+        display: block;
+    }
 }

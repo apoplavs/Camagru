@@ -68,13 +68,17 @@ class Router
 
 	private function getRoutePath()	{
 		if (!empty($_SERVER['REQUEST_URI'])) {
-			return trim($_SERVER['REQUEST_URI'], ROOT_URI.'/');
+		    Debug::dd($_SERVER['REQUEST_URI'], "SERVER");
+            Debug::dd(ROOT_URI, "ROOT_URI");
+            Debug::dd(substr($_SERVER['REQUEST_URI'], strlen(ROOT_URI) + 1), "trim SERVER");
+			return substr($_SERVER['REQUEST_URI'], strlen(ROOT_URI) + 1);
 		} else {
             $this->error('404');
         }
 	}
 
 	private function getControllerName($route_path)	{
+        Debug::dd($route_path, "route path");
 		// ROOT.'/app/controllers/HomeController.php'
 		switch ($route_path) {
 			case 'home':
@@ -93,9 +97,6 @@ class Router
    //      		break;	
 			
 			default:
-                echo "<pre>";
-print_r($route_path);
-echo "</pre>";
 				$this->error('404');
 		}
 	}

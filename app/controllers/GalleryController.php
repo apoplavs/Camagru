@@ -3,7 +3,7 @@
 /**
  *
  */
-class HomeController extends Controller
+class GalleryController extends Controller
 {
 
     public static function index() {

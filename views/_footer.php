@@ -11,5 +11,5 @@
 		</div>
 	</div>
 	<!--    Include error_repoting module-->
-	<script src="/template/js/error_reporting.js"></script>
+<!--	<script src="/template/js/error_reporting.js"></script>-->
 </footer>
