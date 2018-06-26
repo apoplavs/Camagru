@@ -1,0 +1,25 @@
+#registration {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    min-width: 300px;
+    max-width: 400px;
+    margin: auto;
+}
+#registered {
+    float: right;
+    position: relative;
+    top: 15px;
+    font-size: 0.9em;
+}
+/* Super Feature */
+#submit-container {
+    padding: 12px;
+}
+#submit-container input[type=submit]{
+    position: relative;
+    transition: 1s;
+    z-index: 1;
+}
+#submit-container:hover input[type=submit]{
+    top: 10px;
+    margin-left: 235px;
+}

@@ -31,10 +31,10 @@ require_once (ROOT.'/app/Debug.php');
 //including files
 require_once (ROOT.'/app/Router.php');
 
+require_once (ROOT.'/app/Secure.php');
 require_once (ROOT.'/app/models/DB.php');
 require_once (ROOT.'/app/controllers/Controller.php');
 require_once (ROOT.'/app/Mail.php');
-echo "<br><br><br>";
 Debug::dd($_SESSION);
 //Call Router
 $router = new Router();

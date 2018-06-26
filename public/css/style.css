@@ -14,16 +14,26 @@ body {
 
 /*MAIN*/
 a {
-    color: #fbb900;
+    color: #4B99AD;
     text-decoration: none;
     font-weight: bold;
 }
 
 a:hover {
-    color: #444;
+    color: #4691A4;
 }
 
-img {
+header a {
+    color: #fbb900;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header a:hover {
+    color: #c1a75d;
+}
+
+header img {
     width: 100%;
 }
 
@@ -62,18 +72,18 @@ nav {
 }
 
 a:hover#menu-icon {
-    background-color: #444;
+    background-color: #c1a75d;
     border-radius: 4px 4px 0 0;
 }
 
-ul {
+nav ul {
     list-style: none;
 }
 
-li {
+nav li {
     display: inline-block;
     float: left;
-    padding: 5px 20px;
+    padding: 5px 25px;
 }
 
 .current {
@@ -87,14 +97,14 @@ li {
     /*padding: 20px*/
 /*}*/
 
-h1 {
+header h1 {
     font-size: 2em;
     color: #2262AD;
     line-height: 1.15em;
     margin: 20px 0 ;
 }
 
-p {
+header p {
     line-height: 1.45em;
     margin-bottom: 20px;
 }
@@ -122,6 +132,95 @@ div.footer-text>span:nth-child(2) {
 
 
 
+/* MAIN INPUT FORMS */
+.input-form {
+    margin:10px auto;
+    max-width: 400px;
+    padding: 20px 12px 10px 20px;
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.input-form li {
+    padding: 0;
+    display: block;
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+.input-form label{
+    margin:0 0 3px 0;
+    padding:0px;
+    display:block;
+    font-weight: bold;
+}
+.input-form input[type=text],
+.input-form input[type=password],
+.input-form input[type=date],
+.input-form input[type=datetime],
+.input-form input[type=number],
+.input-form input[type=search],
+.input-form input[type=time],
+.input-form input[type=url],
+.input-form input[type=email],
+textarea,
+select{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border:1px solid #BEBEBE;
+    padding: 7px;
+    margin:0px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+}
+.input-form input[type=text]:focus,
+.input-form input[type=password]:focus,
+.input-form input[type=date]:focus,
+.input-form input[type=datetime]:focus,
+.input-form input[type=number]:focus,
+.input-form input[type=search]:focus,
+.input-form input[type=time]:focus,
+.input-form input[type=url]:focus,
+.input-form input[type=email]:focus,
+.input-form textarea:focus,
+.input-form select:focus{
+    -moz-box-shadow: 0 0 8px #fbb900;
+    -webkit-box-shadow: 0 0 8px #fbb900;
+    box-shadow: 0 0 8px #fbb900;
+    border: 1px solid #fbb900;
+}
+.input-form .field-divided{
+    width: 49%;
+}
+
+.input-form .field-long{
+    width: 100%;
+}
+.input-form .field-select{
+    width: 100%;
+}
+.input-form .field-textarea{
+    height: 100px;
+}
+.input-form input[type=submit], .input-form input[type=button]{
+    background: #4B99AD;
+    padding: 8px 15px 8px 15px;
+    border: none;
+    color: #fff;
+}
+.input-form input[type=submit]:hover, .input-form input[type=button]:hover{
+    background: #4691A4;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+}
+.input-form .required, .error-message{
+    color:red;
+}
+.error-message {
+    float: right;
+}
 
 
 
@@ -129,7 +228,21 @@ div.footer-text>span:nth-child(2) {
 
 
 
-/*MEDIA QUERY*/
+
+
+
+
+
+/*MEDIA QUERY MEDIUM DISPLAYS*/
+@media only screen and (max-width : 1200px) {
+    nav li {
+        padding: 5px 8px;
+        font-size: 0.9em;
+    }
+}
+
+
+/*MEDIA QUERY SMALL DISPLAYS*/
 @media only screen and (max-width : 720px) {
 
     header {

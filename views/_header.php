@@ -9,14 +9,16 @@
 <ul>
 
 <li><a href="<?=ROOT_URI?>" class="current">Головна</a></li>
-<li><a href="#">Налаштування</a></li>
 <li><a href="#">Галерея</a></li>
     <?php
     if ($_SESSION && $_SESSION['login']) {
-        echo '<li><a href="#">'.$_SESSION["login"].'</a></li>';
+        echo '
+<li><a href="#">Налаштування</a></li>
+<li><a href="#">'.$_SESSION["login"].'</a></li>';
     } else {
-        echo '<li><a href="#">Вхід</a></li>
-               <li><a href="#">Реєстрація</a></li>';
+        echo '
+<li><a href="'.ROOT_URI.'/login">Вхід</a></li>
+<li><a href="'.ROOT_URI.'/register">Реєстрація</a></li>';
     }
     ?>
 </ul>

@@ -12,14 +12,7 @@ class Router
 		$this->method = $this->getMethodName();
 	}
 
-    public function  error(string $error_number = '400') {
-	    if (file_exists(ROOT . '/views/errors/'.$error_number.'.php')) {
-            include(ROOT . '/views/errors/'.$error_number.'.php');
-        } else {
-            include(ROOT . '/views/errors/404.php');
-        }
-        exit;
-    }
+
 
     /**
      * include necessary file
@@ -41,24 +34,30 @@ class Router
                     if (array_key_exists('object', $_POST)) {
                         $this->request_status = $this->controller::edit($_POST['object'], $_POST);
                     } else {
-                        $this->error('400');
+                        Secure::error('400');
                     }
                     break ;
                 case 'DELETE' :
                     if (array_key_exists('object', $_POST)) {
                         $this->request_status = $this->controller::delete($_POST['object']);
                     } else {
-                        $this->error('400');
+                        Secure::error('400');
                     }
                     break ;
                 default :
-                    $this->error('400');
+                    Secure::error('400');
             }
 		} else {
-			$this->error('404');
+			Secure::error('404');
 		}
-		if (!$this->request_status) {
-            $this->error('400');
+
+		// if method returned false
+		if ($this->request_status === false) {
+            Secure::error('405');
+
+        // if method nothing returned
+        } else if (!$this->request_status) {
+            Secure::error('400');
         }
 	}
 
@@ -73,7 +72,7 @@ class Router
             Debug::dd(substr($_SERVER['REQUEST_URI'], strlen(ROOT_URI) + 1), "trim SERVER");
 			return substr($_SERVER['REQUEST_URI'], strlen(ROOT_URI) + 1);
 		} else {
-            $this->error('404');
+            Secure::error('404');
         }
 	}
 
@@ -97,7 +96,7 @@ class Router
    //      		break;	
 			
 			default:
-				$this->error('404');
+				Secure::error('404');
 		}
 	}
 
@@ -110,7 +109,7 @@ class Router
                     case 'DELETE' :
                         return ('DELETE');
                     default :
-                        $this->error('405');
+                        Secure::error('405');
                 }
             } else {
                 return ('POST');
@@ -189,7 +188,7 @@ class Router
 				if (file_exists($controllerFile))
 					include_once($controllerFile);
 				else
-					$this->error404();
+					Secure::error404();
 				//Create controller object
 				$controllerObject = new $controllerName;
 				//Call controller's action
@@ -201,6 +200,6 @@ class Router
 			}
 		}
 		if ($this->request_status === false)
-			$this->error404();
+			Secure::error404();
 	}
 }
