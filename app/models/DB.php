@@ -2,12 +2,13 @@
 
 // require_once(ROOT.'/config/database.php');
 
-abstract class DB
+class DB
 {
 	protected $db = null;
 	private static $connect_error_mode = true;
 
 	public function  __construct($DB_DSN, $DB_USER, $DB_PASSWORD) {
+		echo "efaergrtwh rtwh trwrtwgrth rtw htrwhwrth";
 		try	{
 			$this->db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 			/*

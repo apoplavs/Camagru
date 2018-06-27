@@ -10,9 +10,9 @@ if (!isset($_SESSION)) {
 define('DEBUG', true);
 
 // if SESSION is Undefined then initialise
-if (!isset($_SESSION)) {
+/*if (!isset($_SESSION)) {
     $_SESSION = null;
-}
+}*/
 
 //Define root directory
 if (!defined('ROOT')) {
@@ -25,7 +25,9 @@ if (!defined('ROOT_URI')) {
 }
 
 //including tools for debug
-require_once (ROOT.'/app/Debug.php');
+if (DEBUG) {
+	require_once (ROOT.'/app/Debug.php');
+}
 
 
 //including files
@@ -35,7 +37,13 @@ require_once (ROOT.'/app/Secure.php');
 require_once (ROOT.'/app/models/DB.php');
 require_once (ROOT.'/app/controllers/Controller.php');
 require_once (ROOT.'/app/Mail.php');
-Debug::dd($_SESSION);
+
+require_once (ROOT.'/config/database.php');
+$dat = new DB($DB_DSN, $DB_USER, $DB_PASSWORD);
+echo "<br><br>";
+require_once (ROOT.'/app/models/Log.php');
+Log::createLog("XSS attack attempt");
+
 //Call Router
 $router = new Router();
 // getting and showing response page

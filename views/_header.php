@@ -11,7 +11,7 @@
 <li><a href="<?=ROOT_URI?>" class="current">Головна</a></li>
 <li><a href="#">Галерея</a></li>
     <?php
-    if ($_SESSION && $_SESSION['login']) {
+    if (isset($_SESSION) && $_SESSION['login']) {
         echo '
 <li><a href="#">Налаштування</a></li>
 <li><a href="#">'.$_SESSION["login"].'</a></li>';
