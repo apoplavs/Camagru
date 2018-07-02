@@ -1,5 +1,5 @@
 <?php
-
+require_once (ROOT.'/app/models/User.php');
 /**
 * 
 */
@@ -7,6 +7,7 @@ class RegisterController extends Controller
 {
 	
 	public static function index() {
+		User::checkExistsValue('email', 'p.andiy.v@gmail.com');
         $csrf_token = Secure::generateCSRF();
 //        $error_message = "fewfefr";
         include_once (ROOT . '/views/register.php');
@@ -42,7 +43,23 @@ class RegisterController extends Controller
 			|| !array_key_exists("csrf", $request) || !Secure::checkCSRF($request["csrf"])) {
 			Secure::error(400);
 		}
+		if (strlen($request['password']) < 6) {
+			return('мінімальна довжина паролю 6 символів');
+		}
+		if ($request['password'] != $request['confirm-password']) {
+			return('паролі не збігаються');
+		}
+		if (filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
+			return('некоректний email');
+		}
+		// @todo зробити перевірку унікальності email і login
+//		$is_unique =
+		if ($request['email']) {
 		
+		}
+		if ($request['email']) {
+		
+		}
 		return (true);
 	}
 	

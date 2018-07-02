@@ -3,5 +3,5 @@
         `client` varchar(15) DEFAULT NULL,
         `notice` varchar(255) DEFAULT NULL,
         `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (id),
+        PRIMARY KEY (id)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -4,26 +4,77 @@
 
 class DB
 {
-	protected $db = null;
+	protected static $db = null;
 	private static $connect_error_mode = true;
 
-	public function  __construct($DB_DSN, $DB_USER, $DB_PASSWORD) {
-		echo "efaergrtwh rtwh trwrtwgrth rtw htrwhwrth";
+	public static function connect() {
+		global $DB_DSN;
+		global $DB_USER;
+		global $DB_PASSWORD;
+		
 		try	{
-			$this->db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+			self::$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 			/*
-			* ATTR_ERRMODE - Режим повідомлень про помилки.
-			* ERRMODE_EXCEPTION - викидати Exception.
+			* ATTR_ERRMODE - Error message mode
+			* ERRMODE_EXCEPTION - throw Exception.
 			*/
-			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			// відключити клієнт-серверну емуляцію підготовлених запитів
-			$this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-			// встановлення кодування
-			$this->db->exec("SET NAMES UTF8");
+			self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			// disable client-server emulation of prepared queries
+			self::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+			// set encode
+			self::$db->exec("SET NAMES UTF8");
 			} catch (PDOException $e) {
 				die('Error : ' . $e->getMessage());
 			}
 	}
+	
+	public static function insert(string $table, array $data) {
+		if (self::$db == null) {
+			self::connect();
+		}
+	}
+	
+	public static function update(string $table, array $data) {
+		if (self::$db == null) {
+			self::connect();
+		}
+	}
+	
+	public static function query(string $query, $params = [], $mode = null) {
+		if (self::$db == null) {
+			self::connect();
+		}
+		try {
+			$result = self::$db->prepare($query);
+			Debug::dd($result);
+			Debug::dd($query);
+			$result->execute($params);
+			if ($mode) {
+				return $result->fetchAll($mode);
+			}
+		} catch(PDOException $e) {
+//			header("location: /");
+			die('Error : ' . $e->getMessage());
+		}
+		return ($result);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	private static function delFolder($dir)
 	{
@@ -84,7 +135,7 @@ class DB
 		return false;
 	}
 
-	public static function query($query_string, $params = array(), $fetch_mode = true)
+	public static function dquery1($query_string, $params = array(), $fetch_mode = true)
 	{
 		$database = self::get();
 		$request = $database->prepare($query_string);

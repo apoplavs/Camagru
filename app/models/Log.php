@@ -11,7 +11,7 @@
 
 class Log extends DB {
 	public static function createLog($notice = "") {
-//		parent::__construct();
-	Debug::dd(parent::get());
+		$query = "INSERT INTO logs (client, notice) VALUES (:client, :notice)";
+		parent::query($query, [':client' => $_SERVER['REMOTE_ADDR'], ':notice' => $notice]);
 	}
 }

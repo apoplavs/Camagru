@@ -29,20 +29,20 @@ if (DEBUG) {
 	require_once (ROOT.'/app/Debug.php');
 }
 
+// connect to DB
+require_once (ROOT.'/app/models/DB.php');
+require_once (ROOT.'/config/database.php');
+//DB::connect();
 
 //including files
 require_once (ROOT.'/app/Router.php');
-
 require_once (ROOT.'/app/Secure.php');
-require_once (ROOT.'/app/models/DB.php');
 require_once (ROOT.'/app/controllers/Controller.php');
 require_once (ROOT.'/app/Mail.php');
 
-require_once (ROOT.'/config/database.php');
-$dat = new DB($DB_DSN, $DB_USER, $DB_PASSWORD);
-echo "<br><br>";
+
 require_once (ROOT.'/app/models/Log.php');
-Log::createLog("XSS attack attempt");
+
 
 //Call Router
 $router = new Router();

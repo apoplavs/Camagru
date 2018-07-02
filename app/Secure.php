@@ -36,7 +36,6 @@ class Secure
     public static function protectionXSS($str) {
     	$protect_str = strip_tags($str);
     	if ($protect_str != $str) {
-			require_once (ROOT.'/app/models/Log.php');
 			Log::createLog("XSS attack attempt");
 		}
 		return ($protect_str);
