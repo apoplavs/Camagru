@@ -67,10 +67,8 @@ class Router
 
 	private function getRoutePath()	{
 		if (!empty($_SERVER['REQUEST_URI'])) {
-		    Debug::dd($_SERVER['REQUEST_URI'], "SERVER");
-            Debug::dd(ROOT_URI, "ROOT_URI");
-            Debug::dd(substr($_SERVER['REQUEST_URI'], strlen(ROOT_URI) + 1), "trim SERVER");
-			return substr($_SERVER['REQUEST_URI'], strlen(ROOT_URI) + 1);
+            Debug::dd(substr($_SERVER['REDIRECT_URL'], strlen(ROOT_URI) + 1), "trim SERVER");
+			return substr($_SERVER['REDIRECT_URL'], strlen(ROOT_URI) + 1);
 		} else {
             Secure::error('404');
         }

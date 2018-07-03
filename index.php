@@ -43,7 +43,7 @@ require_once (ROOT.'/app/Mail.php');
 
 require_once (ROOT.'/app/models/Log.php');
 
-
+//Debug::dd($_SERVER, "SERVER");
 //Call Router
 $router = new Router();
 // getting and showing response page

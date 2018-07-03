@@ -28,18 +28,6 @@ class DB
 			}
 	}
 	
-	public static function insert(string $table, array $data) {
-		if (self::$db == null) {
-			self::connect();
-		}
-	}
-	
-	public static function update(string $table, array $data) {
-		if (self::$db == null) {
-			self::connect();
-		}
-	}
-	
 	public static function query(string $query, $params = [], $mode = null) {
 		if (self::$db == null) {
 			self::connect();

@@ -7,10 +7,11 @@ class Mail
 {
 	private static $from = "apoplavs@camagru.unit.ua";
 
-	public static function send($email, $message, $from = self::from, $subject = "Camagru", $cc = "", $bcc ="", $priotity = "3") {
+	public static function send($email, $message, $subject = "Camagru", $cc = "", $bcc ="",
+		$priority = "3") {
 
 		// setting headers
-		$headers = self::getHeaders($from, $cc, $bcc, $priotity);
+		$headers = self::getHeaders(self::$from, $cc, $bcc, $priority);
 		
 		// send mail
 		if (mail($email, $subject, $message, $headers)) {
@@ -21,22 +22,22 @@ class Mail
 	}
 
 
-	private static function getHeaders($from, $cc = "", $bcc ="", $priotity = "3") {
+	private static function getHeaders($from, $cc = "", $bcc ="", $priority = "2") {
 		$headers = "";
 		$headers .= "MIME-Version: 1.0\r\n"; 
 		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 		$headers .= "Date: ".date("r (T)")." \r\n";
 
-		if (strpos($from, "ourwebsite.com") != false || strpos($from, "rencontresportive.com") != "") {
-			$headers .= "From: Ourwebsite.com <" . $from . ">\r\n";
+		if (strpos($from, "camagru.unit.ua") != false || strpos($from, "camagru.unit.ua") != "") {
+			$headers .= "From: camagru.unit.ua <" . $from . ">\r\n";
 		} else {
 			$headers .= "From: " . $from . " <" . $from . ">\r\n";
 		}
 
 		$headers .= "X-Sender: <" . $from . ">\r\n";
-		$headers .= "X-Priority: " . $priotity . "\r\n";
+		$headers .= "X-Priority: " . $priority . "\r\n";
 		$headers .= "X-Mailer: PHP\r\n";
-		$headers .= "Return-Path: <admin@ourwebsite.com>\r\n";
+		$headers .= "Return-Path: <apoplavs@camagru.unit.ua>\r\n";
 
 		if ($cc != "") {
 			$headers .= "cc:" . $cc . "\r\n";
@@ -44,6 +45,7 @@ class Mail
 		if ($bcc != "") {
 			$headers .= "bcc:" . $bcc . "\r\n";
 		}
+		return $headers;
 	}
 
 }

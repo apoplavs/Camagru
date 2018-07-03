@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link href="<?=ROOT_URI?>/public/css/style.css" rel="stylesheet" type="text/css">
-	<link href="<?=ROOT_URI?>/public/css/register.css" rel="stylesheet" type="text/css">
+	<link href="<?=ROOT_URI?>/public/css/auth.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <?php include_once (ROOT.'/views/_header.php');?>
@@ -41,5 +41,5 @@
 
 	<?php include_once (ROOT.'/views/_footer.php');?>
 </body>
-<script src="<?=ROOT_URI?>/public/js/register.js"></script>
+<script src="<?=ROOT_URI?>/public/js/auth.js"></script>
 </html>
