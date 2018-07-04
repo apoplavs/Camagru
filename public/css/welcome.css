@@ -1,0 +1,32 @@
+html {
+    background-color: #eee;
+}
+#main-page {
+    text-align: center;
+    margin: 5% auto auto;
+}
+#main-page img {
+    border-radius: 10%;
+    width: 40px;
+    margin: 2%;
+}
+
+div.title {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    position: relative;
+    top: -50px;
+    color: #333333;
+    font-size: 5em;
+    font-family: Gloria, cursive;
+}
+
+div.description {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    color: #333333;
+    font-size: 1.8em;
+    font-family: Gloria, cursive;
+}

@@ -13,7 +13,7 @@
 </head>
 <body>
 	<?php include_once (ROOT.'/views/_header.php');?>
-
+Hello World
 
 	<?php include_once (ROOT.'/views/_footer.php');?>
 </body>

@@ -41,16 +41,15 @@ class User extends DB {
 	 * @param $value
 	 * @return bool
 	 */
-	public static function getUser($login) {
-		$query = "SELECT id, email, login,password, first_name, last_name, signup_token, active FROM users WHERE login = :val LIMIT 1";
-		$result = parent::query($query, [':val' => $login], PDO::FETCH_COLUMN);
+	public static function getUser($val, $field = "login") {
+		$query = "SELECT id, email, login,password, first_name, last_name, signup_token, active FROM users WHERE $field = :val LIMIT 1";
+		$result = parent::query($query, [':val' => $val], PDO::FETCH_ASSOC);
 		// if value not exists
 		if (empty($result)) {
 			return (false);
 		}
-		Debug::dd($result);
 		// if value exists in DB
-		return ($result);
+		return ($result[0]);
 	}
 	
 	

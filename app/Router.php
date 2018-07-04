@@ -10,6 +10,7 @@ class Router
 		$route_path = $this->getRoutePath();
 		$this->controller = $this->getControllerName($route_path);
 		$this->method = $this->getMethodName();
+		Debug::dd($this->controller);
 	}
 
 
@@ -66,9 +67,13 @@ class Router
 	// PRIVATE METHODS
 
 	private function getRoutePath()	{
+    	$route_len = strlen($_SERVER['REQUEST_URI']) - (strlen($_SERVER['QUERY_STRING']) +
+			strlen(ROOT_URI) + (strpos($_SERVER['REQUEST_URI'], '?') > 1 ? 2 : 1));
+   
+		// getting clear path
 		if (!empty($_SERVER['REQUEST_URI'])) {
-            Debug::dd(substr($_SERVER['REDIRECT_URL'], strlen(ROOT_URI) + 1), "trim SERVER");
-			return substr($_SERVER['REDIRECT_URL'], strlen(ROOT_URI) + 1);
+			return substr($_SERVER['REQUEST_URI'], strlen(ROOT_URI) + 1,
+				$route_len);
 		} else {
             Secure::error('404');
         }
@@ -82,12 +87,16 @@ class Router
 				return 'HomeController';
 			case 'login':
 				return 'LoginController';
+			case 'reset-pass':
+				return 'ResetPassController';
 			case 'logout':
 				return 'LogoutController';
 			case 'register':
 				return 'RegisterController';
 			case 'gallery':
 				return 'GalleryController';
+			case '':
+				return 'WelcomeController';
 						
 			// case (preg_match('/John.*/', $name) ? true : false) :
    //      		// do stuff for people whose name is John, Johnny, ...

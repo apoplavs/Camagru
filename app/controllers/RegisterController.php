@@ -7,6 +7,10 @@ class RegisterController extends Controller
 {
 	
 	public static function index() {
+		if (session_status() == PHP_SESSION_ACTIVE) {
+			header("location: ".ROOT_URI."/home");
+			return (true);
+		}
 		// if need verify email of user
 		if ($_GET && array_key_exists('t', $_GET) && array_key_exists('u', $_GET)) {
 			User::verifyUser($_GET['u'], $_GET['t']);
@@ -22,8 +26,11 @@ class RegisterController extends Controller
 	
 
 	public static function store($request) {
+		if (session_status() == PHP_SESSION_ACTIVE) {
+			header("location: ".ROOT_URI."/home");
+			return (true);
+		}
 	    $is_valid = self::checkInputData($request);
-	    
 	    // if input data is not valid
         if ($is_valid !== true) {
 			$error_message = $is_valid;

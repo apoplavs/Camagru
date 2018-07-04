@@ -4,10 +4,18 @@
     max-width: 400px;
     margin: auto;
 }
+
 #registered {
     float: right;
     position: relative;
     top: 15px;
+    font-size: 0.9em;
+}
+
+#not-registered {
+    float: right;
+    position: relative;
+    top: 3px;
     font-size: 0.9em;
 }
 
