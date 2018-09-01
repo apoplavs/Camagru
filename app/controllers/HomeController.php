@@ -7,6 +7,10 @@ class HomeController extends Controller
 {
 	
 	public static function index() {
+		if (!Secure::auth()) {
+			header("location: ".ROOT_URI."/login");
+			return (true);
+		}
 		include_once (ROOT . '/views/home.php');
 		return(true);
 	}

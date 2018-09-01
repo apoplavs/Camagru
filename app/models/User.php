@@ -42,7 +42,7 @@ class User extends DB {
 	 * @return bool
 	 */
 	public static function getUser($val, $field = "login") {
-		$query = "SELECT id, email, login,password, first_name, last_name, signup_token, active FROM users WHERE $field = :val LIMIT 1";
+		$query = "SELECT id, email, login, password, first_name, last_name, signup_token, active FROM users WHERE $field = :val LIMIT 1";
 		$result = parent::query($query, [':val' => $val], PDO::FETCH_ASSOC);
 		// if value not exists
 		if (empty($result)) {
@@ -63,6 +63,19 @@ class User extends DB {
 	public static function updateOne($field, $value, $search_field, $search_value) {
 		$query = "UPDATE users SET $field = :val WHERE $search_field = :search_val LIMIT 1";
 		parent::query($query, [':search_val' => $search_value, ':val' => $value]);
+	}
+	
+	
+	/**
+	 * insert new password to DB
+	 * @param $new_pass
+	 * @param $id
+	 * @param $token
+	 * @return bool
+	 */
+	public static function updatePass($new_pass, $id, $token) {
+		$query = "UPDATE users SET password = :new_pass WHERE id = :id AND signup_token = :token  LIMIT 1";
+		parent::query($query, [':new_pass' => $new_pass, ':id' => $id, ':token' => $token]);
 	}
 	
 	

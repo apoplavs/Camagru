@@ -15,7 +15,7 @@
     <?php include_once (ROOT.'/views/_header.php');?>
     <div id="registration">
         <form method="post" action="<?=ROOT_URI?>/register">
-            <input type="hidden" name="csrf" value="<?=$csrf_token?>">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <ul class="input-form">
                 <li><span class="error-message"><?php echo (isset($error_message) ? $error_message : "");?></span></li>
                 <li><label>Логін <span class="required">*</span></label><input type="text" name="login" class="field-long" maxlength="16" minlength="3" required></li>

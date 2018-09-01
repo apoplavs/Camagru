@@ -15,7 +15,7 @@
 <?php include_once (ROOT.'/views/_header.php');?>
 <div id="login">
 	<form method="post" action="<?=ROOT_URI?>/reset-pass">
-		<input type="hidden" name="csrf" value="<?=$csrf_token?>">
+		<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 		<ul class="input-form">
 			<li><span class="error-message"><?php echo (isset($error_message) ? $error_message : "");?></span>
 				<span class="notice-message"><?php echo (isset($message) ? $message : "");?></span></li>

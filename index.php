@@ -1,18 +1,12 @@
 <?php
 
-if (!isset($_SESSION)) {
-	//Define settings
-	ini_set('display_startup_errors', 1);
-	ini_set('max_input_vars', 20);
-	ini_set('display_errors', 1);
-	error_reporting(E_ALL);
-}
-define('DEBUG', true);
 
-// if SESSION is Undefined then initialise
-/*if (!isset($_SESSION)) {
-    $_SESSION = null;
-}*/
+//Define settings
+ini_set('display_startup_errors', 1);
+ini_set('max_input_vars', 20);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+define('DEBUG', true);
 
 //Define root directory
 if (!defined('ROOT')) {
@@ -42,6 +36,13 @@ require_once (ROOT.'/app/Mail.php');
 
 
 require_once (ROOT.'/app/models/Log.php');
+
+// if SESSION is Undefined then initialise
+session_start();
+if (!array_key_exists('csrf', $_SESSION)) {
+	$_SESSION['csrf'] = Secure::generateCSRF();
+}
+Debug::dd($_SESSION);
 
 //Debug::dd($_SERVER, "SERVER");
 //Call Router

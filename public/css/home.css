@@ -1,0 +1,83 @@
+#container {
+    width: 70%;
+    /*height: 400px;*/
+    background-color: #4B99AD;
+    margin: 0 auto;
+    align-content: center;
+}
+
+#camera {
+    width: 640px;
+    height: 480px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+#photo-button {
+    display:block;
+    position:relative;
+    margin-left:auto;
+    margin-right:5px;
+    margin-top:-240px;
+    height: 50px;
+    width: 50px;
+    border-radius: 40%;
+    border: 1px;
+    outline: none;
+    box-shadow: inset 0px 0px 1px 2px rgb(0, 0, 0), 0px 0px 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    background-color: #fbb900;
+    opacity: 0.8;
+    z-index: 10;
+}
+
+#photo-button:active {
+    background-color: #9b7301;
+    box-shadow: inset 0px 0px 2px 4px rgb(0, 0, 0), 0px 0px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+video {
+    width: 100%;
+    height: 100%;
+}
+#objects img {
+    z-index: 20;
+    width: 240px;
+}
+
+#draw-object {
+    z-index: 80;
+    left: 0;
+    top: 0;
+    max-width: 320px;
+    max-height: 240px;
+    position: absolute;
+}
+
+
+/*MEDIA QUERY MEDIUM DISPLAYS*/
+@media only screen and (max-width : 1200px) {
+    #container {
+       width: 85%;
+    }
+    #camera {
+        width: 320px;
+        height: 240px;
+    }
+    #photo-button {
+        margin-top:-140px;
+        height: 35px;
+        width: 35px;
+    }
+}
+
+
+
+
+/*MEDIA QUERY SMALL DISPLAYS*/
+@media only screen and (max-width : 720px) {
+    #container {
+        width: 100%;
+    }
+}

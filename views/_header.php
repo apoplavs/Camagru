@@ -11,10 +11,11 @@
 <li><a href="<?=ROOT_URI?>" class="current">Головна</a></li>
 <li><a href="#">Галерея</a></li>
     <?php
-    if (isset($_SESSION) && $_SESSION['login']) {
+    if (Secure::auth()) {
         echo '
 <li><a href="#">Налаштування</a></li>
-<li><a href="#">'.$_SESSION["login"].'</a></li>';
+<li><a href="'.ROOT_URI.'/home">'.$_SESSION['user']['login'].'</a></li>
+<li><a href="'.ROOT_URI.'/logout">Вийти</a></li>';
     } else {
         echo '
 <li><a href="'.ROOT_URI.'/login">Вхід</a></li>

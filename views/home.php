@@ -13,7 +13,36 @@
 </head>
 <body>
 	<?php include_once (ROOT.'/views/_header.php');?>
-Hello World
+<div id="container">
+	<div id="camera-frame">
+		<div id="camera">
+			<video id="video">Камера недоступна</video>
+			<img id="draw-object" alt="">
+			<button id="photo-button"></button>
+		</div>
+		<canvas style="display: none" id="canvas">
+		</canvas>
+		fddfsg<br><br><br><br>
+	</div>
+</div>
+<div id="objects">
+		<div class="frames" id="frames1">
+			<img src="<?=ROOT_URI?>/public/img/frames/1.gif" id="fer2">
+					<input name="frame" type="radio"  onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/1.gif'">
+			<img src="<?=ROOT_URI?>/public/img/frames/2.png" onmousedown="dragObject=this;return false;">
+					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/2.png'">
+			<img src="<?=ROOT_URI?>/public/img/frames/3.png">
+					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/3.png'">
+		</div>
+		<div class="frames" id="frames2">
+			<img src="<?=ROOT_URI?>/public/img/frames/4.png">
+					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/4.png'">
+			<img src="<?=ROOT_URI?>/public/img/frames/5.png">
+					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/5.png'">
+			<img src="<?=ROOT_URI?>/public/img/frames/6.png">
+					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/6.png'">
+		</div>
+	</div>
 
 	<?php include_once (ROOT.'/views/_footer.php');?>
 </body>

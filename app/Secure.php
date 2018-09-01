@@ -82,6 +82,20 @@ class Secure {
 	
 	
 	/**
+	 * checking if User is auth
+	 * @param $str
+	 * @return string
+	 */
+	public static function auth() {
+		if (session_status() == PHP_SESSION_ACTIVE && !empty($_SESSION)
+			&& array_key_exists('auth', $_SESSION) && $_SESSION['auth'] == true) {
+			return (true);
+		}
+		return (false);
+	}
+	
+	
+	/**
 	 * show error page
 	 * @param string $error_number
 	 */

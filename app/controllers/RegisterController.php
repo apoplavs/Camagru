@@ -7,7 +7,7 @@ class RegisterController extends Controller
 {
 	
 	public static function index() {
-		if (session_status() == PHP_SESSION_ACTIVE) {
+		if (Secure::auth()) {
 			header("location: ".ROOT_URI."/home");
 			return (true);
 		}
@@ -18,15 +18,13 @@ class RegisterController extends Controller
 			include_once (ROOT . '/views/login.php');
 			return (true);
 		}
-		
-        $csrf_token = Secure::generateCSRF();
         include_once (ROOT . '/views/register.php');
         return (true);
 	}
 	
 
 	public static function store($request) {
-		if (session_status() == PHP_SESSION_ACTIVE) {
+		if (Secure::auth()) {
 			header("location: ".ROOT_URI."/home");
 			return (true);
 		}
@@ -34,7 +32,6 @@ class RegisterController extends Controller
 	    // if input data is not valid
         if ($is_valid !== true) {
 			$error_message = $is_valid;
-			$csrf_token = Secure::generateCSRF();
 			include_once (ROOT . '/views/register.php');
 			return (true);
 		}
@@ -107,7 +104,6 @@ class RegisterController extends Controller
 		
 		if (!Mail::send($email, $message, $subject)) {
 			$error_message = 'не вдалось надіслати email';
-			$csrf_token = Secure::generateCSRF();
 			include_once (ROOT . '/views/register.php');
 			exit(1);
 		}

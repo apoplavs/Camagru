@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html" charset="utf-8">
-	<title>Camagru Sign in</title>
+	<title>Camagru Reset Password</title>
 	<meta name="keywords" content="Camagru 42 UNIT Factory">
 	<meta name="author" content="apoplavs">
 	<meta name="description" content="educational project Camagru in UNIT Factory created by Andrii Poplavskiy">
@@ -14,24 +14,22 @@
 <body>
 <?php include_once (ROOT.'/views/_header.php');?>
 <div id="login">
-	<form method="post" action="<?=ROOT_URI?>/login">
+	<form method="post" action="<?=ROOT_URI?>/reset-pass">
+		<input type="hidden" name="_method" value="PUT">
 		<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+		<input type="hidden" name="object" value="<?=$object_id?>">
+		<input type="hidden" name="token" value="<?=$object_token?>">
 		<ul class="input-form">
 			<li><span class="error-message"><?php echo (isset($error_message) ? $error_message : "");?></span>
 				<span class="notice-message"><?php echo (isset($message) ? $message : "");?></span></li>
-			<li><label>Логін <input type="text" name="login" class="field-long" maxlength="16" minlength="3" required></label></li>
 			<li>
-				<label>Пароль
-				<input type="password" name="password" class="field-long" maxlength="32" minlength="6" required></label>
+				<label>Введіть новий пароль
+					<input type="password" name="password" class="field-long" maxlength="32" minlength="6" required>
+				</label>
 			</li>
 			<li><hr></li>
 			<li>
-				<input type="submit" value=" Увійти ">
-				<span id="not-registered">
-					<a href="<?=ROOT_URI?>/register">Не зареєстрований</a>
-					<br>або<br>
-					<a href="<?=ROOT_URI?>/reset-pass">забув пароль?</a>
-				</span>
+				<input type="submit" value="Змінити пароль">
 			</li>
 		</ul>
 	</form>
@@ -39,5 +37,4 @@
 
 <?php include_once (ROOT.'/views/_footer.php');?>
 </body>
-<script src="<?=ROOT_URI?>/public/js/auth.js"></script>
 </html>

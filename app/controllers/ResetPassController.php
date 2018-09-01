@@ -7,25 +7,25 @@ class ResetPassController extends Controller
 {
 	
 	public static function index() {
-		if (session_status() == PHP_SESSION_ACTIVE) {
+		if (Secure::auth()) {
 			header("location: ".ROOT_URI."/home");
 			return (true);
 		}
 		// if need verify email of user
 		if ($_GET && array_key_exists('t', $_GET) && array_key_exists('u', $_GET)) {
 			User::verifyUser($_GET['u'], $_GET['t']);
-			$message = 'email підтверджено';
+			$object_data = User::getUser($_GET['t'], 'signup_token');
+			$object_id = $object_data['id'];
+			$object_token = $object_data['signup_token'];
 			include_once (ROOT . '/views/create_new_pass.php');
 			return (true);
 		}
-		
-		$csrf_token = Secure::generateCSRF();
 		include_once (ROOT . '/views/reset_pass.php');
 		return (true);
 	}
 
 	public static function store($request) {
-		if (session_status() == PHP_SESSION_ACTIVE) {
+		if (Secure::auth()) {
 			header("location: ".ROOT_URI."/home");
 			return (true);
 		}
@@ -34,19 +34,30 @@ class ResetPassController extends Controller
 		// if input data is not valid
 		if ($is_valid !== true) {
 			$error_message = $is_valid;
-			$csrf_token = Secure::generateCSRF();
 			include_once (ROOT . '/views/reset_pass.php');
 			return (true);
 		}
 		$user = User::getUser($request['email'], 'email');
 		self::sendResetMail($user['login'], $user['email'], $user['signup_token']);
-		$message = 'посилання для відновлення паролю надіслано на Ваш email';
-		
+		$message = '<h1 align="center">посилання для відновлення паролю надіслано на Ваш email<h1>';
+		echo($message);
 		return (true);
 	}
 
 	public static function edit($id, $request) {
-		return(false);
+		
+		$is_valid = self::checkInputPass($request);
+		// if input data is not valid
+		if ($is_valid !== true) {
+			$error_message = $is_valid;
+			$object_id = $id;
+			$object_token = $request['token'];
+			include_once (ROOT . '/views/create_new_pass.php');
+			return (true);
+		}
+		User::updatePass(Secure::encryptPass($request['password']), $id, $request['token']);
+		include_once (ROOT . '/views/login.php');
+		return(true);
 	}
 
 	public static function delete($id) {
@@ -72,6 +83,21 @@ class ResetPassController extends Controller
 	}
 	
 	
+	private static function checkInputPass($request) {
+		if (!array_key_exists("password", $request)
+			|| !array_key_exists("csrf", $request) || !Secure::checkCSRF($request["csrf"])) {
+			Secure::error(400);
+		}
+		if (strlen($request['password']) < 6) {
+			return('мінімальна довжина паролю 6 символів');
+		}
+		if (strlen($request['password']) > 32) {
+			return('максимальна довжина паролю 32 символа');
+		}
+		return (true);
+	}
+	
+	
 	private static function sendResetMail(string $login, string $email, string $token) {
 		// sending mail
 		$message = 'Для відновлення паролю перейдіть за <a href="'
@@ -80,7 +106,6 @@ class ResetPassController extends Controller
 		
 		if (!Mail::send($email, $message, $subject)) {
 			$error_message = 'не вдалось надіслати email';
-			$csrf_token = Secure::generateCSRF();
 			include_once (ROOT . '/views/reset_pass.php');
 			exit(1);
 		}

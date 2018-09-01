@@ -7,17 +7,16 @@ class LoginController extends Controller
 {
 	
 	public static function index() {
-		if (session_status() == PHP_SESSION_ACTIVE) {
+		if (Secure::auth()) {
 			header("location: ".ROOT_URI."/home");
 			return (true);
 		}
-		$csrf_token = Secure::generateCSRF();
 		include_once (ROOT . '/views/login.php');
 		return (true);
 	}
 
 	public static function store($request) {
-		if (session_status() == PHP_SESSION_ACTIVE) {
+		if (Secure::auth()) {
 			header("location: ".ROOT_URI."/home");
 			return (true);
 		}
@@ -36,6 +35,7 @@ class LoginController extends Controller
 	
 	// PRIVATE METHODS
 	private static function checkInputData($request) {
+		Debug::dd($request);
 		if (!array_key_exists("login", $request) || !array_key_exists("password", $request)
 			|| !array_key_exists("csrf", $request)	|| !Secure::checkCSRF($request["csrf"])) {
 			Secure::error(400);
@@ -43,7 +43,6 @@ class LoginController extends Controller
 		$user = User::getUser($request['login']);
 		if ($user === false || !password_verify($request['password'], $user['password'])) {
 			$error_message = 'неправильний логін або пароль';
-			$csrf_token = Secure::generateCSRF();
 			include_once (ROOT . '/views/login.php');
 			return(false);
 		}
@@ -57,12 +56,10 @@ class LoginController extends Controller
 	 */
 	private static function makeSession($user) {
 		// make new session for user
-		if (session_status() !== PHP_SESSION_ACTIVE) {
-			session_start();
-			$_SESSION['csrf'] = Secure::generateCSRF();
+		if (!Secure::auth()) {
+			$_SESSION['auth'] = true;
 			$_SESSION['user'] = $user;
 		}
 	}
-	
 	
 }
