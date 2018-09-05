@@ -16,31 +16,40 @@
 <div id="container">
 	<div id="camera-frame">
 		<div id="camera">
-			<video id="video">Камера недоступна</video>
+			<video id="video" muted="muted">Камера недоступна</video>
 			<img id="draw-object" alt="">
 			<button id="photo-button"></button>
 		</div>
 		<canvas style="display: none" id="canvas">
 		</canvas>
-		fddfsg<br><br><br><br>
+		<br>
 	</div>
 </div>
 <div id="objects">
 		<div class="frames" id="frames1">
-			<img src="<?=ROOT_URI?>/public/img/frames/1.gif" id="fer2">
-					<input name="frame" type="radio"  onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/1.gif'">
-			<img src="<?=ROOT_URI?>/public/img/frames/2.png" onmousedown="dragObject=this;return false;">
-					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/2.png'">
+			<img src="<?=ROOT_URI?>/public/img/frames/1.png">
+					<!-- <input name="frame" type="radio"  onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/1.gif'"> -->
+			<img src="<?=ROOT_URI?>/public/img/frames/2.png">
+					<!-- <input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/2.png'"> -->
 			<img src="<?=ROOT_URI?>/public/img/frames/3.png">
-					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/3.png'">
+			<img src="<?=ROOT_URI?>/public/img/frames/4.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/5.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/6.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/7.png">
+					<!-- <input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/3.png'"> -->
 		</div>
 		<div class="frames" id="frames2">
-			<img src="<?=ROOT_URI?>/public/img/frames/4.png">
-					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/4.png'">
-			<img src="<?=ROOT_URI?>/public/img/frames/5.png">
-					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/5.png'">
-			<img src="<?=ROOT_URI?>/public/img/frames/6.png">
-					<input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/6.png'">
+			
+					<!-- <input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/4.png'"> -->
+			<img src="<?=ROOT_URI?>/public/img/frames/8.gif">
+					<!-- <input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/5.png'"> -->
+			<img src="<?=ROOT_URI?>/public/img/frames/9.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/10.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/11.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/12.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/13.png">
+			<img src="<?=ROOT_URI?>/public/img/frames/14.png">
+					<!-- <input name="frame" type="radio" onclick="document.getElementById('draw-object').src = '<?=ROOT_URI?>/public/img/frames/6.png'"> -->
 		</div>
 	</div>
 
